@@ -1,4 +1,3 @@
-<a href=""><img src="https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_misc/Black%20Logo.png" title="" alt="" height="200" width="500" position="center"></a>
 # LightBot
 # Artificial Intelligence Adaptive Traffic Control Solution
 
@@ -13,7 +12,10 @@ This repository represents a remote collaboration for LightBot Artificial Intell
 * GitKraken / GitHub Desktop
 
 ## Documenation
-* SRS Document for Demo 3: 
+* SRS Document V.3: 
+* User Manual V.2:
+* Coding Standards:
+* Technical Installation Manual:
 
 ## Demo Videos
 * Demo 3 Video link: 
@@ -26,10 +28,6 @@ This repository represents a remote collaboration for LightBot Artificial Intell
 * <details>
     <summary><b>What I Did </b></summary>
     <br>
-    - Demo 1: Set up MongoDB database, set up Git repo, set up the web application (system interface), worked on the SRS document and worked on the demo video & recorded contribution video.
+    - Demo 3: Set up new MongoDB database with relevant data, set up new Git repository, set up new Node.js Web Server, continued with web application React development (LightBot Dashboard interface), created new traffic Simulation interface & manual override interaction of Simulation, updated the SRS document, updated User Manual, created Coding Standards document, created Technical Installations Manual and recorded the demo video.
     <br>
-    - Demo 2: 
-    - Demo 3:
 </details>
-
-
