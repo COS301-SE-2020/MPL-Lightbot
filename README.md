@@ -11,11 +11,11 @@ This repository represents a remote collaboration for LightBot Fuzzy Logic Adapt
 * ClickUp (Used for task allocation and time management) - https://share.clickup.com/l/h/2dyz3-141/e75ad4ae1b0344a
 * GitKraken / GitHub Desktop
 
-## Documenation
-* SRS Document V.3: 
-* User Manual V.2:
-* Coding Standards:
-* Technical Installation Manual:
+## Documentation
+* SRS Document V.3: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Requirements%20Specification%20V.3.pdf
+* User Manual V.2: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/User%20Manual%20V.2.pdf
+* Coding Standards: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Coding%20Standards%20V.1.pdf
+* Technical Installation Manual: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Technical%20Installation%20Manual%20V.1.pdf
 
 ## Demo Videos
 * Demo 3 Video link: 
