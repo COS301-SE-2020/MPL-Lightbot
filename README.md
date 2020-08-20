@@ -2,7 +2,7 @@
 # Fuzzy Logic Adaptive Traffic Control Solution
 
 ## Description
-This repository represents a remote collaboration for LightBot Fuzzy Logic Adaptive Traffic Control Solution offered by 5DT for the COS 301 Capstone University of Pretoria. The purpose of LightBot is to minimize the delays that are caused by traffic congestions at various intersections. The LightBot system will be used to prove a concept that the addition of a machine learning algorithm will develop a good policy for which to control the traffic lights at a given intersection.
+This repository represents a remote collaboration for LightBot Fuzzy Logic Adaptive Traffic Control Solution offered by 5DT for the COS 301 Capstone University of Pretoria. The purpose of LightBot is to minimize the delays that are caused by traffic congestions at various intersections. The LightBot system will be used to prove a concept that the addition of a fuzzy logic algorithm will develop a good policy for which to control the traffic lights at a given intersection.
 <br>
     
 
@@ -18,7 +18,7 @@ This repository represents a remote collaboration for LightBot Fuzzy Logic Adapt
 * Technical Installation Manual: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Technical%20Installation%20Manual%20V.1.pdf
 
 ## Demo Videos
-* Demo 3 Video link: 
+* Demo 3 Video link: https://drive.google.com/file/d/1NHRfoBwe2WA-v8maNG0mFjLMf60DvdgB/view?usp=sharing
 
 ## Collaborators
 <b>Laura-Lee Strydom :</b><br>
