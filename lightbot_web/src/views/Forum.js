@@ -23,21 +23,21 @@ class Forum extends React.Component {
 												<th>Title</th>
 												<th>Comments</th>
 												<th>Posted By</th>
-												<th className="text-center">Views</th>
+												<th className="text-center">Date</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>Manual Override Bug</td>
 												<td>Screen freezes on 3rd override</td>
-												<td>James Tilde</td>
-												<td className="text-center">35 Views</td>
+												<td>Laura Strydom</td>
+												<td className="text-center">04 August 2020</td>
 											</tr>
 											<tr>
 												<td>Log Out Bug</td>
 												<td>Times out on certain log outs</td>
-												<td>Diane Jetson</td>
-												<td className="text-center">56 Views</td>
+												<td>Anthony Boekkooi</td>
+												<td className="text-center">14 July 2020</td>
 											</tr>
 											
 										</tbody>
@@ -60,21 +60,21 @@ class Forum extends React.Component {
 												<th>Title</th>
 												<th>Comments</th>
 												<th>Posted By</th>
-												<th className="text-center">Views</th>
+												<th className="text-center">Date</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>Manual Override Bug</td>
 												<td>Freezing screen - bug fixed</td>
-												<td>Leron Whitle</td>
-												<td className="text-center">13 Views</td>
+												<td>John Wick</td>
+												<td className="text-center">02 August 2020</td>
 											</tr>
 											<tr>
 												<td>Log Out Bug</td>
 												<td>Time out fixed on log out function</td>
-												<td>Terry Crews</td>
-												<td className="text-center">9 Views</td>
+												<td>King Peterson</td>
+												<td className="text-center">27 July 2020</td>
 											</tr>
 										</tbody>
 									</Table>
@@ -96,21 +96,21 @@ class Forum extends React.Component {
 												<th>Title</th>
 												<th>Comments</th>
 												<th>Posted By</th>
-												<th className="text-center">Views</th>
+												<th className="text-center">Date</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>System Upgrade</td>
 												<td>Time for a system upgrade!</td>
-												<td>Wayne Peterson</td>
-												<td className="text-center">97 Views</td>
+												<td>King Peterson</td>
+												<td className="text-center">19 August 2020</td>
 											</tr>
 											<tr>
 												<td>System Down Time</td>
 												<td>The system will be down on Tuesday 15/05/2020 for system fixes.</td>
-												<td>Sinaai Waas</td>
-												<td className="text-center">132 Views</td>
+												<td>Laura Strydom</td>
+												<td className="text-center">29 July 2020</td>
 											</tr>
 										</tbody>
 									</Table>

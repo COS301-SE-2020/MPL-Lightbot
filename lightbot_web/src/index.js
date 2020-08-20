@@ -4,9 +4,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 
 import AdminLayout from "layouts/Admin/Admin.js";
 
@@ -23,7 +23,7 @@ import "assets/demo/demo.css";
 import "assets/css/nucleo-icons.css";
 
 const hist = createBrowserHistory();
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
 ReactDOM.render(
 	<Router history={hist}>

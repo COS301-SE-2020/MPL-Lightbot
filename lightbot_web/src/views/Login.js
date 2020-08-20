@@ -1,14 +1,11 @@
 import React from "react";
 import Cookies from "universal-cookie";
-import { Link, Redirect } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { Alert, Label, FormText, Button, Card, CardHeader, CardBody, CardFooter, CardText, FormGroup, Form, Input, Row, Col } from "reactstrap";
+import { Alert, Button, FormGroup, Form, Input } from "reactstrap";
 
 const cookies = new Cookies();
-
-const api = axios.create({ baseURL: "http://localhost:3001/" });
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -42,37 +39,36 @@ export default class Login extends React.Component {
 
 		const { email, password } = this.state;
 
+		var isValidCred = false;
+		var sessionToken = "";
 		await axios
-			.post( "http://localhost:3001/login", {
-				Email: email,
-				Password: password,
+			// .post( "http://129.232.161.210:8000/user/login", {
+				.post( "http://localhost:8000/user/login", {
+				User_email: email,
+				User_password: password,
 			})
 			.then(response => {
 				console.log("Success ========>", response);
-
-				// HANDLE RESPONE FROM API HERE
+				if (response.status === 200)
+				{
+					isValidCred = true;
+					sessionToken = response.data;
+				}
+				// HANDLE RESPONSE FROM API HERE
 			})
 			.catch(error => {
-				console.log("Error ========>", error);
+				console.log("Error: Cannot connect to server", error);
 			});
 
-		// CALL TO API HERE (EXAMPLE DATA)
-
-		// (12@12 and 123 are the test credentials at the moment)
-
-		if (email === "duncan.tilley@5dt.com" && password === "DuncanTilley") {
+		if (isValidCred && sessionToken !== "") {
 			//CALL TO API HERE WITH EMAIL AND PASSWORD
-
-			// EXAMPLE OF AXIOS API REQUEST:
-
-			// MUST BE IMPLEMENTED AT ACTUAL LOGIN FUNCTION ABOVE
 
 			// If login success: Set the JWT from API in cookies
 			// and set the logged in user email address also
 
-			this.setState({ loginSuccess: "SUCCESS !" });
-			cookies.set("JWT", email + ":" + password);
-			cookies.set("Email", email);
+			this.setState({ loginSuccess: "Login Successful" });
+			cookies.set("JWT", sessionToken);
+			cookies.set("Email",email);
 
 			//Redirect the user to the dashboard
 			window.location = "/admin/dashboard";
@@ -90,10 +86,10 @@ export default class Login extends React.Component {
 
 				<h4 style={MyStyles.Hdr}>AN ENHANCED ADAPTIVE TRAFFIC OPTIMIZATION SOLUTION WITH REINFORCEMENT LEARNING</h4>
 				
-				<h1 className="LoginLabel" style={MyStyles.Hdr}>
+				{/* <h1 className="LoginLabel" style={MyStyles.Hdr}>
 					LOGIN
-				</h1>
-				<h2 style={MyStyles.LoginLabel2}>Welcome!</h2>
+				</h1> */}
+				<h2 style={MyStyles.LoginLabel2}>Welcome! Please Log In</h2>
 
 				<FormGroup style={MyStyles.Linput1}>
 		
@@ -122,6 +118,18 @@ export default class Login extends React.Component {
 					/>
 				</FormGroup>
 
+				{this.state.loginErrors && (
+					<Alert color="dark" style={MyStyles.Alrt}>
+						{this.state.loginErrors}
+					</Alert>
+				)}
+
+				{this.state.loginSuccess && (
+					<Alert color="success" style={MyStyles.Alrt}>
+						{this.state.loginSuccess}
+					</Alert>
+				)}
+
 				<FormGroup style={MyStyles.Btn1}>
 					<Button
 						style={MyStyles.Btn2}
@@ -145,21 +153,10 @@ export default class Login extends React.Component {
 		  <img
             className='LoginGLogo'
             alt='...'
-            src={require('../assets/img/logo.png')}
+            src={require('../assets/img/traffic.png')}
             style={MyStyles.LoginGLogo}
           />
 
-				{this.state.loginErrors && (
-					<Alert color="dark" style={MyStyles.Alrt}>
-						{this.state.loginErrors}
-					</Alert>
-				)}
-
-				{this.state.loginSuccess && (
-					<Alert color="success" style={MyStyles.Alrt}>
-						{this.state.loginSuccess}
-					</Alert>
-				)}
 			</Form>
 		);
 	}
@@ -176,7 +173,7 @@ const MyStyles = {
 	  },
 	LoginGLogo: {
 		paddingTop: '20px',
-		height: '150px',
+		height: '80px',
 		marginBottom: '20px'
 	},
 	Alrt: { 
@@ -206,7 +203,7 @@ const MyStyles = {
 		height: "50px", 
 		fontSize: "18px" 
 	},
-	Hdr: { 
-		marginBottom: 20 
-	}
+	// Hdr: { 
+	// 	marginBottom: 20 
+	// }
 }

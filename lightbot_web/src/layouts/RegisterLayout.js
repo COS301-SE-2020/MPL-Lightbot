@@ -4,14 +4,14 @@ import { Route } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import Login from "views/Login.js";
+// import AdminNavbar from "components/Navbars/AdminNavbar.js";
+// import Footer from "components/Footer/Footer.js";
+// import Sidebar from "components/Sidebar/Sidebar.js";
+// import Login from "views/Login.js";
 import Register from "views/Register.js";
 
 import routes from "routes.js";
-import logo from "assets/img/logo.png";
+// import logo from "assets/img/logo.png";
 import Cookies from "universal-cookie";
 
 import Background from "../assets/img/back.jpg";

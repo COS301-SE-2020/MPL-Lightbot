@@ -12,7 +12,7 @@ class Footer extends React.Component {
 					<div className="copyright">
 						Powered by{" "}
 						<a href="#!" target="_blank">
-							Gradient
+							LightBot
 						</a>{" "}
 						technology
 					</div>

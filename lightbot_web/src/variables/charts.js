@@ -1,3 +1,4 @@
+// import axios from "axios";
 // ##############################
 // // // Chart variables
 // #############################
@@ -56,8 +57,22 @@ let chart1_2_options = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
+var newData = [];
+
+
 let chartExample1 = {
+	// setData:function => (dataArr){
+	// 	newData = dataArr;
+	// 	},
+
+		setData: function(dataArr) {
+			console.log("Test");
+			newData = dataArr;
+			console.log(newData);
+		  },
+
 	data1: canvas => {
+
 		let ctx = canvas.getContext("2d");
 
 		let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -70,7 +85,7 @@ let chartExample1 = {
 			labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
 			datasets: [
 				{
-					label: "My First dataset",
+					label: "Total Simulations",
 					fill: true,
 					backgroundColor: gradientStroke,
 					borderColor: "#1f8ef1",
@@ -84,7 +99,8 @@ let chartExample1 = {
 					pointHoverRadius: 4,
 					pointHoverBorderWidth: 15,
 					pointRadius: 4,
-					data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
+					data: newData,
+					// data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
 				},
 			],
 		};

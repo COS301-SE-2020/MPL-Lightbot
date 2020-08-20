@@ -1,13 +1,13 @@
 import React from "react";
 
 // reactstrap components
-import { Card, CardHeader, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, Row, Col, Button, Table, CardTitle} from "reactstrap";
 
-//iframe components
-//import Frame from 'iframe-react';
-import Iframe from 'react-iframe';
+export default class Simulation extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
-class Simulation extends React.Component {
 	render() {
 		return (
 			<>
@@ -15,20 +15,51 @@ class Simulation extends React.Component {
 					<Row>
 						<Col md="12">
 						<Card className="card-plain" >
-								<CardHeader style={MyStyles.cardH}>Simulation</CardHeader>
-								<div style={MyStyles.backG}>
-								<Iframe
-										//src="http://ec2-18-224-22-142.us-east-2.compute.amazonaws.com:5000"
-										src="http://ec2-3-23-99-159.us-east-2.compute.amazonaws.com:5000"
-
-										width="1130px"
-										height="600px"
-										id="Simulation"
-										display="initial"
-										position="relative" 
-										
-      							/>
-								</div>
+								<CardHeader>Simulation</CardHeader>
+								<CardBody>
+									<div id="manual" className="manualO" style={MyStyles.Inside}>
+									{/* <a href={"http://129.232.161.210:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download> */}
+										<a href={"http://localhost:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download>
+											<Button className="btn-fill" color="primary" type="submit" block>
+												Download Simulator Desktop Application
+											</Button>
+										</a>
+									</div>
+								</CardBody>
+							</Card>
+						</Col>
+					</Row>
+					<Row>
+						<Col md="12">
+							<Card>
+								<CardHeader>
+									<CardTitle tag="h4">
+										<b>Simulation Information</b>
+									</CardTitle>
+								</CardHeader>
+								<CardBody>
+									<Table className="tablesorter" responsive>
+										<tbody>
+											<tr>
+												<td>You can download the Simulator Desktop Application by clicking on the above button. 
+													Your download will start automatically. This will download an executable .jar file, which you can run on your local machine.
+													No additional installation for this file is 
+												</td>
+												
+											</tr>
+											<tr>
+												<td>*Please Note: To be able to run this application, you will need to install Java 8 on your local machine. 
+													The link to download Java 8 can be found here: <a href="https://java.com/en/download/">https://java.com/en/download/</a>
+												</td>
+											</tr>
+											<tr>
+												<td>For more information about the simulator and how it works, see section 6 in the user manual.
+													All relevant information can be found there. 
+												</td>
+											</tr>
+										</tbody>
+									</Table>
+								</CardBody>
 							</Card>
 						</Col>
 					</Row>
@@ -44,7 +75,9 @@ const MyStyles = {
 	},
 	backG: {
 		backgroundColor: "white",
-	}
+	},
+	Inside: { 
+		position: "relative", 
+		overflow: "hidden" 
+	},
 }
-
-export default Simulation;

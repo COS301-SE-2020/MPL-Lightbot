@@ -4,13 +4,13 @@ import { Route } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+// import AdminNavbar from "components/Navbars/AdminNavbar.js";
+// import Footer from "components/Footer/Footer.js";
+// import Sidebar from "components/Sidebar/Sidebar.js";
 import ForgotPassword from "views/ForgotPassword.js";
 
 import routes from "routes.js";
-import logo from "assets/img/logo.png";
+// import logo from "assets/img/logo.png";
 import Cookies from "universal-cookie";
 
 //BG Image import
@@ -72,7 +72,7 @@ class ForgotPassLayout extends React.Component {
 
 	getRoutes = routes => {
 		return routes.map((prop, key) => {
-			if (prop.path == "/forgot-password") {
+			if (prop.path === "/forgot-password") {
 				return <Route exact path={prop.path} component={ForgotPassword} key={key} />;
 			}
 		});

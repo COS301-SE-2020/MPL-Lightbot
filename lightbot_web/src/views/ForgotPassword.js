@@ -1,15 +1,9 @@
 import React from "react";
-import Cookies from "universal-cookie";
-import { Link, Redirect } from "react-router-dom";
-
-import axios from "axios";
+// import Cookies from "universal-cookie";
+import { Link } from "react-router-dom";
+// import axios from "axios";
 
 import { Alert, Button, FormGroup, Form, Input } from "reactstrap";
-
-const cookies = new Cookies();
-
-// Base API URL
-const api = axios.create({ baseURL: "http://localhost:3001/" });
 
 export default class ForgotPassword extends React.Component {
 	constructor(props) {
@@ -95,7 +89,7 @@ export default class ForgotPassword extends React.Component {
 				<img
             		className='LoginGLogo'
             		alt='...'
-            		src={require('../assets/img/logo.png')}
+            		src={require('../assets/img/traffic.png')}
             		style={MyStyles.LoginGLogo}
           		/>
 
@@ -111,8 +105,6 @@ export default class ForgotPassword extends React.Component {
 				)}
 			</Form>
 		);
-
-		// FIX: Last button on form shows the error message, change to alert class
 	}
 }
 
@@ -127,7 +119,7 @@ const MyStyles = {
 	  },
 	LoginGLogo: {
 		paddingTop: '20px',
-		height: '150px',
+		height: '80px',
 		marginBottom: '20px'
 	},
 	Aler: {

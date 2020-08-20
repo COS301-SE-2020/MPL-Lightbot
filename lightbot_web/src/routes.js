@@ -1,12 +1,9 @@
 import Dashboard from "views/Dashboard.js";
-import Icons from "views/Icons.js";
 import ManualOverride from "views/ManualOverride.js";
 import Notifications from "views/Notifications.js";
-//import Rtl from "views/Rtl.js";
 import Forum from "views/Forum.js";
 import Simulation from "views/Simulation.js";
 import UserProfile from "views/UserProfile.js";
-
 import Login from "views/Login.js";
 import Register from "views/Register";
 import ForgotPassword from "views/ForgotPassword.js";
@@ -55,7 +52,7 @@ var routes = [
 		icon: "tim-icons icon-pin",
 		component: ManualOverride,
 		layout: "/admin",
-		showOnDash: true,
+		showOnDash: false,
 	},
 	{
 		path: "/simulation",

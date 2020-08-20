@@ -1,12 +1,88 @@
 import React from "react";
-import Cookies from "universal-cookie";
-import { Link, Redirect } from "react-router-dom";
+// import Cookies from "universal-cookie";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-import { Button, FormGroup, Form, Input } from "reactstrap";
+import { Alert, Button, FormGroup, Form, Input } from "reactstrap";
 
-const cookies = new Cookies();
 
 export default class RegisterView extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: "",
+			surname: "",
+			email: "",
+			password: "",
+			confirmpass: "",
+			regErrors: "",
+			regSuccess: "",
+		};
+
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value,
+		});
+	}
+
+	// HANDLE REGISTER REQUEST
+	handleSubmit = async event => {
+		event.preventDefault();
+
+		//Reset response messages
+		this.state.regErrors = "";
+		this.state.regSuccess = "";
+
+		const { name, surname, email, password } = this.state;
+		var aresponse;
+		var bresponse;
+
+		var createdUser = {
+			User_name: name,
+			User_surname: surname,
+			User_email: email,
+			User_password: password,
+		  }
+		//   this.setState({ regSuccess: JSON.stringify(createdUser) });
+		
+		await axios
+			// .post( "http://129.232.161.210:8000/user/register", {
+				.post( "http://localhost:8000/user/register", {
+				User_name: name,
+				User_surname: surname,
+				User_email: email,
+				User_password: password,
+			})
+			.then(response => {
+				console.log("Success ========>", response);
+				aresponse = response.status;
+				bresponse = response.data;
+
+				// HANDLE RESPONSE FROM API HERE
+			})
+			.catch(error => {
+				// console.log("Error: Cannot connect to server", error);
+			});
+
+		if (aresponse === 200) {
+
+		 	// this.setState({ regSuccess: "Registration Successful" });
+
+			//Redirect the user to the login page
+			window.location = "/admin/login";
+		} else {
+			// Set login error state as error
+			// this.setState({ regErrors: ""});
+			// console.log("Error Registering User");
+		}
+	};
+
+
 	render() {
 		return (
 			<Form className="LoginPane">
@@ -19,10 +95,12 @@ export default class RegisterView extends React.Component {
 				<FormGroup style={MyStyles.Input1}>
 					
 					<Input
-						type="test"
+						type="text"
 						name="name"
 						id="idName"
 						placeholder="Name"
+						value={this.state.name}
+						onChange={this.handleChange}
 						style={MyStyles.Input2}
 						required
 					/>
@@ -32,9 +110,11 @@ export default class RegisterView extends React.Component {
 					
 					<Input
 						type="text"
-						name="Surname"
+						name="surname"
 						id="idSurname"
 						placeholder="Surname"
+						value={this.state.surname}
+						onChange={this.handleChange}
 						style={MyStyles.Input2}
 						required
 					/>
@@ -47,6 +127,8 @@ export default class RegisterView extends React.Component {
 						name="email"
 						id="idEmail"
 						placeholder="Email"
+						value={this.state.email}
+						onChange={this.handleChange}
 						style={MyStyles.Input2}
 						required
 					/>
@@ -56,9 +138,11 @@ export default class RegisterView extends React.Component {
 					
 					<Input
 						type="password"
-						name="password2"
-						id="idPassword2"
+						name="password"
+						id="idPassword"
 						placeholder="Password"
+						value={this.state.password}
+						onChange={this.handleChange}
 						style={MyStyles.Input2}
 						required
 					/>
@@ -76,8 +160,26 @@ export default class RegisterView extends React.Component {
 					/>
 				</FormGroup>
 
+				{this.state.regErrors && (
+					<Alert color="dark" style={MyStyles.Alrt}>
+						{this.state.regErrors}
+					</Alert>
+				)}
+
+				{this.state.regSuccess && (
+					<Alert color="success" style={MyStyles.Alrt}>
+						{this.state.regSuccess}
+					</Alert>
+				)}
+
 				<FormGroup style={MyStyles.SBtn1}>
-					<Button style={MyStyles.SBtn2} size="lg" block>
+					<Button 
+						style={MyStyles.SBtn2} 
+						size="lg" 
+						type="submit"
+						onClick={this.handleSubmit}
+						block
+					>
 						Sign Up
 					</Button>
 				</FormGroup>
@@ -89,9 +191,10 @@ export default class RegisterView extends React.Component {
 				<img
             className='LoginGLogo'
             alt='...'
-            src={require('../assets/img/logo.png')}
+            src={require('../assets/img/traffic.png')}
             style={MyStyles.LoginGLogo}
           />
+
 			</Form>
 		);
 	}
@@ -108,7 +211,7 @@ const MyStyles = {
 	  },
 	LoginGLogo: {
 		paddingTop: '20px',
-		height: '150px',
+		height: '80px',
 		marginBottom: '20px'
 	},
 	SBtn1: { 
@@ -133,5 +236,10 @@ const MyStyles = {
 	}, 
 	Hdr: { 
 		marginBottom: 30 
+	},
+	Alrt: { 
+		marginTop: "30px", 
+		marginLeft: "40px", 
+		marginRight: "40px" 
 	}
 }
