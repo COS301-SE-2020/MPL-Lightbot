@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const uV = require('mongoose-unique-validator')
 const Bcrypt = require('bcryptjs')
 const { ErrorResponse } = require('../utils/Error.util')
+const jwt = require('njwt')
 
 const UserSchema = new mongoose.Schema({
   User_name: {
@@ -44,14 +45,14 @@ const UserSchema = new mongoose.Schema({
 UserSchema.plugin(uV)
 
 UserSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
+  if (!this.isModified('password')) {
     try {
       const salt = await Bcrypt.genSalt(12)
-      this.password = await Bcrypt.hash(this.password, salt)
+      this.User_password = await Bcrypt.hash(this.User_password, salt)
       this.id = undefined
     } catch (err) {
       return next(
-        // new ErrorResponse()
+        new ErrorResponse("User could not be Saved", err),
         console.log("Save 1"),
         console.log(err))
     }
@@ -59,18 +60,15 @@ UserSchema.pre('save', async function (next) {
   next()
 })
 
-UserSchema.methods.MatchPassword = async (candidate) => {
-  return await Bcrypt.compare(candidate, this.password)
+UserSchema.methods.MatchPassword = async (candidate,userpass) => {
+    return await Bcrypt.compare( userpass,candidate.User_password)
 }
 
-UserSchema.methods.getJWT = () => {
-  return jwt.sign(
-    { id: this._id, User_email: this.User_email },
-    process.env.AppSecret,
-    {
-      expiresIn: process.env.ExpiryJWT,
-    }
-  )
+UserSchema.methods.getJWT = (uemail) => {
+  const claims = { iss: process.env.JWTiss, sub: process.env.JWTsub, aud:process.env.JWTaud, email:uemail}
+  const token = jwt.create(claims, process.env.JWTKEY)
+  token.setExpiration(new Date().getTime() + 60*1000)
+  return token.compact()
 }
 
 module.exports = mongoose.model('User', UserSchema)

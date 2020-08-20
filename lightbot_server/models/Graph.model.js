@@ -14,4 +14,4 @@ const GraphSchema = new mongoose.Schema({
     default: Date.now,
   },
 })
-module.exports = mongoose.model('graph', GraphSchema)
+module.exports = mongoose.model('graph', GraphSchema, "Simulation_performance")

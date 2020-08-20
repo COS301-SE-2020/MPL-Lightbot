@@ -1,39 +1,60 @@
 const asyncHandler = require('express-async-handler')
 const { ErrorResponse, BadRequest, NotFound } = require('../utils/Error.util')
 const { SuccessResponse } = require('../utils/Success.util')
-// const Graph = require('../models/Graph.model')
 const Forum = require('../models/Forum.model')
 const User = require('../models/User.model')
+const Graph = require('../models/Graph.model')
 const UserController = require('./User.controller')
 const mongoose = require('mongoose')
-// const Notification = require('../models/Notification.model')
 // const State = require('../models/State.model')
 
 module.exports = {
   getGraphData: asyncHandler(async (req, res, next) => {
-    res.json(
-      new SuccessResponse('Successfully acquired graph data.', 'Graph data set')
-    )
+    const Data = await Graph.find({},
+      {
+        Total_sim: 1,
+        _id: 0
+      });
+    res.json(Data);
+
+    //ADDITIONAL 
+    // GraphData = await Forum.find()
+    // res.json(
+    //   new SuccessResponse(
+    //     'Successfully acquired graph data.',
+    //     {GraphData: GraphData}
+    //   )
+    // )
+
   }),
 
   getForumData: asyncHandler(async (req, res, next) => {
+    ForumData = await Forum.find()
     res.json(
-      new SuccessResponse('Successfully acquired forum data.', 'Forum data set')
+      new SuccessResponse(
+        'Successfully acquired forum data.',
+        {ForumData: ForumData}
+      )
     )
   }),
 
   getNotificationData: asyncHandler(async (req, res, next) => {
+    NotificationData = await Forum.find()
     res.json(
       new SuccessResponse(
         'Successfully acquired notification data.',
-        'Notification data set'
+        {NotificationData: NotificationData}
       )
     )
   }),
 
   getStateData: asyncHandler(async (req, res, next) => {
+    StateData = await Forum.find()
     res.json(
-      new SuccessResponse('Successfully acquired state data.', 'State data set')
+      new SuccessResponse(
+        'Successfully acquired state data.',
+        {StateData: StateData}
+      )
     )
   }),
 
@@ -46,10 +67,12 @@ module.exports = {
     })
     let user
     try{
-        user = await User.findById(creator)
+      user = await User.findById(await (await User.findOne({User_email:creator}))._id)
+      createForumPost.creator = user;
     }catch(err)
     {
       return next(
+        console.log(err),
         new ErrorResponse('Creating forum post failed. Please try again.')
       )
     }
@@ -60,21 +83,22 @@ module.exports = {
       )
     }
     try {
-      const session = await mongoose.startSession()
-      session.startTransaction()
+      // const session = await mongoose.startSession()
+      // session.startTransaction()
       await createForumPost.save({session: session})
-      user.ForumPosts.push(createForumPost)
-      await user.save({session: session})
-      await session.commitTransaction()
+      // user.ForumPosts.push(createForumPost)
+      // await user.save({session: session})
+      // await session.commitTransaction()
     } catch (err) {
       return next(
+        console.log(err),
         new ErrorResponse('Creating forum post failed. Please try again.')
       )
     }
     res.json(
       new SuccessResponse(
         'Successfully submitted forum post.',
-        'req.params.forumpostid'
+        {ForumPost: createForumPost.toObject({getters: true})}
       )
     )
   }),
@@ -104,7 +128,7 @@ module.exports = {
     res.json(
       new SuccessResponse(
         'Successfully updated forum post.',
-        req.params.forumpostid
+        {ForumPost: choice.toObject({getters: true})}
       )
     )
   }),
@@ -130,7 +154,7 @@ module.exports = {
     res.json(
       new SuccessResponse(
         'Successfully deleted forum post.',
-        req.params.forumpostid
+        {ForumPost: choice.toObject({getters: true})}
       )
     )
   }),

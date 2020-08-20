@@ -30,10 +30,18 @@ router.get(
   require('../controllers/User.controller').logoutUser
 )
 
-// // @route     PUT user/update-details
+// @route     POST user/logged in
+// @desc      User Logged In Route
+// @access    Private
+router.post(
+  '/loggedIn',
+  require('../controllers/User.controller').loggedIn
+)
+
+// // @route     POST user/update-details
 // // @desc      Update User Details Route
 // // @access    Private
-router.put(
+router.post(
   '/update-details',
   require('../controllers/User.controller').updateUserDetails
 )

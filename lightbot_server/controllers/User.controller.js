@@ -1,8 +1,10 @@
 const asyncHandler = require('express-async-handler')
+const { ErrorResponse } = require('../utils/Error.util')
 const { BadRequest } = require('../utils/Error.util')
 const { SuccessResponse } = require('../utils/Success.util')
 const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
+const { Forbidden, Unauthorized } = require('../utils/Error.util')
 
 module.exports = {
   registerUser: asyncHandler(async (req, res, next) => {
@@ -13,22 +15,19 @@ module.exports = {
     }
     catch (err) {
       return next(
-        // new ErrorResponse('Something went wrong could not register user.', err)
-        console.log("Login 1"),
+        new ErrorResponse('Something went wrong could not register user.', err),
+        console.log("registerUser 1 Something went wrong could not register user."),
         console.log(err)
       )
     }
     if(existing)
     {
       return next(
-        // new ErrorResponse('User already exists please sign in.', err)
-        console.log("Login 2")
-        
+        new BadRequest('User already exists please sign in.'),
+        console.log("registerUser 2 User already exists please sign in")
       )
     }
 
-    let hashedPassword;
-    bcrypt.hash
     const createdUser = new User({
       User_name,
       User_surname,
@@ -36,28 +35,32 @@ module.exports = {
       User_password,
       ForumPosts: []
     })
+
     try{
       await createdUser.save()
     }
     catch (err) {
       return next(
-        // new ErrorResponse('Something went wrong could not register user.', err)
-        console.log("Login 3"),
+        new ErrorResponse('Something went wrong could not save/register user.', err),
+        console.log("registerUser 3 Something went wrong could not save/register user"),
         console.log(err)
       )
     }
+
     let token;
     try{
-      // token = createdUser.getJWT()
+       token = createdUser.getJWT()
+       console.log("token:"+token)
     }
     catch(err)
     {
       return next(
-        // new ErrorResponse('Something went wrong could not register user', err)
-        console.log("Login 4"),
+        new ErrorResponse('Something went wrong could not getJWT()', err),
+        console.log("registerUser 4 Something went wrong could not getJWT()"),
         console.log(err)
       )
     }
+
     res.json(new SuccessResponse("User registration successful.",{user: createdUser.toObject({getters: true})}))
   }),
 
@@ -69,45 +72,74 @@ module.exports = {
     }
     catch (err) {
       return next(
-        // new ErrorResponse('Something went wrong could not login user.')
-        "Login 1"
+        new ErrorResponse('Something went wrong could not findOne user.', err),
+        console.log("loginUser 1 Something went wrong could not findOne user"),
+        console.log(err)
       )
     }
+    // console.log("loginUser 1 existing")
     if(!existing)
     {
       return next(
-        // new ErrorResponse('Invalid credentials.')
-        "Login 1"
+        new BadRequest('User does not Exist.'),
+        console.log("loginUser 2 User does not Exist"),
+        console.log(err)
       )
     }
-    let isValidPassword = true
+    // console.log("loginUser 2 existing")
+
+    let isValidPassword = false
     try{
-      isValidPassword = await existing.MatchPassword()
+        isValidPassword = await existing.MatchPassword(existing, User_password)
     }
     catch(err)
     {
       return next(
-        // new ErrorResponse('Something went wrong could not login user.')
-        "Login 1"
+        new ErrorResponse('Something went wrong could not login user.', err),
+        console.log("loginUser 3 Something went wrong could not MatchPassword"),
+        console.log(err)
       )
     }
+    // console.log("loginUser 3 isValidPassword")
+
     if(!isValidPassword)
     {
       return next(
-        //new ErrorResponse('Invalid credentials.')
-        "Login 1"
+        new Unauthorized("Invalid Credentials"),
+        console.log("loginUser 4 Invalid Credentials")
       )
     }
-    
-    res.json(new SuccessResponse("User login successful.","User data"))
+    // console.log("loginUser 4 isValidPassword")
+
+    // console.log("User login successful")
+    res.json(new SuccessResponse("User login successful.",existing.getJWT()))
   }),
 
   logoutUser: asyncHandler(async (req, res, next) => {
     res.json(new SuccessResponse("Successfully signed out user.","Redirect sign in."))
   }),
 
+  loggedIn: asyncHandler(async (req, res, next) => {
+    // res.json(new SuccessResponse("Successfully signed out user.","Redirect sign in."))
+    const Data = await User.findOne({User_email : req.body.User_email}).select("-User_password");
+      res.json(Data);
+  }),
+
   updateUserDetails: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("Successfully updated user details.","New user data"))
+    // res.json(new SuccessResponse("Successfully updated user details.","New user data"))
+    const filter = {User_email : req.body.User_email};
+    const update = {
+      User_name : req.body.User_name,
+      User_surname : req.body.User_surname
+     };
+
+    let doc = await User.findOne({User_email : req.body.User_email});
+
+    // Document changed in MongoDB, but not in Mongoose
+    await User.updateOne(filter, update);
+
+    await doc.save();
+    res.json(new SuccessResponse("Successfully updated user details.","Miscellaneous"))
   }),
 
   updateUserPass: asyncHandler(async (req, res, next) => {
@@ -132,7 +164,7 @@ module.exports = {
         users = await User.find({},'-User_password')
     }catch (err) {
       return next(
-        // new ErrorResponse('Fetching users failed.')
+        //new ErrorResponse('Fetching users failed.', err)
       )
     } 
     res.json(new SuccessResponse("Successfully removed user.",users.map(user => user.toObject({getters: true}))))

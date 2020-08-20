@@ -5,7 +5,7 @@ const { NotFound } = require('../utils/Error.util')
 // @route     Error undefined route
 // @desc      Not Found
 // @access    N/A
-router.use('/', (req, res, next) => {
+router.use('/', (err, req, res, next) => {
   next(new NotFound("Resource not found"))
 })
 
