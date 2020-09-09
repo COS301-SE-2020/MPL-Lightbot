@@ -38,7 +38,7 @@ router.post(
   require('../controllers/User.controller').loggedIn
 )
 
-// // @route     POST user/update-details
+// // @route     PUT user/update-details
 // // @desc      Update User Details Route
 // // @access    Private
 router.post(

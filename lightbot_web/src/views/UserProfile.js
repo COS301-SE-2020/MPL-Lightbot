@@ -26,7 +26,6 @@ export default class UserProfile extends React.Component {
 	}
 
 	componentDidMount() {
-		var aresponse;
 
 		axios
 		 .post( "http://129.232.161.210:8000/user/loggedIn", {
@@ -34,7 +33,6 @@ export default class UserProfile extends React.Component {
 				User_email: cookies.get("Email")
 			})
 			.then(response => {
-				aresponse = response.status;
 				if (response.status === 200)
 				{
 					console.log(response)
@@ -46,12 +44,6 @@ export default class UserProfile extends React.Component {
 				}
 			});
 
-			if (aresponse === 200) {
-				this.setState({ changeSuccess: "Registration Successful" });
-		   } else {
-			   // Set login error state as error
-			   this.setState({ changeErrors: ""});
-		   }
 
 	}
 
@@ -80,17 +72,16 @@ export default class UserProfile extends React.Component {
 			})
 			.then(response => {
 				console.log("Success ========>", response);
-				// if (response.status === 200)
-				// {
-				// 	this.setState({ changeSuccess: "Update Successful" });
-				// }
+				
+				if (response.status === 200)
+				{
+					this.setState({ changeSuccess: "Update Successful" });
+				}
 				
 			})
 			.catch(error => {
-				// this.setState({ changeErrors: "Update Unsuccessful" });
+				this.setState({ changeErrors: "Update Unsuccessful" });
 			});
-
-			
 		
 	};	
 
@@ -184,7 +175,8 @@ export default class UserProfile extends React.Component {
 const MyStyles = {
 	Alrt: { 
 		marginTop: "30px", 
-		marginLeft: "40px", 
-		marginRight: "40px" 
+		// marginLeft: "400px", 
+		marginRight: "390px",
+		paddingLeft: "310px"
 	},
 }

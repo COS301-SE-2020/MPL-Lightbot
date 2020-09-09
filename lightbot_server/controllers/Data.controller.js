@@ -1,31 +1,23 @@
 const asyncHandler = require('express-async-handler')
 const { ErrorResponse, BadRequest, NotFound } = require('../utils/Error.util')
 const { SuccessResponse } = require('../utils/Success.util')
+const Graph = require('../models/Graph.model')
 const Forum = require('../models/Forum.model')
 const User = require('../models/User.model')
-const Graph = require('../models/Graph.model')
 const UserController = require('./User.controller')
 const mongoose = require('mongoose')
+// const Notification = require('../models/Notification.model')
 // const State = require('../models/State.model')
 
 module.exports = {
   getGraphData: asyncHandler(async (req, res, next) => {
-    const Data = await Graph.find({},
-      {
-        Total_sim: 1,
-        _id: 0
-      });
-    res.json(Data);
-
-    //ADDITIONAL 
-    // GraphData = await Forum.find()
-    // res.json(
-    //   new SuccessResponse(
-    //     'Successfully acquired graph data.',
-    //     {GraphData: GraphData}
-    //   )
-    // )
-
+    GraphData = await Graph.find()
+    res.json(
+      new SuccessResponse(
+        'Successfully acquired graph data.',
+        {GraphData: GraphData}
+      )
+    )
   }),
 
   getForumData: asyncHandler(async (req, res, next) => {
@@ -67,8 +59,8 @@ module.exports = {
     })
     let user
     try{
-      user = await User.findById(await (await User.findOne({User_email:creator}))._id)
-      createForumPost.creator = user;
+        user = await User.findById(await (await User.findOne({User_email:creator}))._id)
+        createForumPost.creator = user;
     }catch(err)
     {
       return next(
@@ -85,10 +77,10 @@ module.exports = {
     try {
       // const session = await mongoose.startSession()
       // session.startTransaction()
-      await createForumPost.save({session: session})
-      // user.ForumPosts.push(createForumPost)
-      // await user.save({session: session})
-      // await session.commitTransaction()
+      await createForumPost.save()
+      //user.ForumPosts.push(createForumPost)
+      //await user.save({session: session})
+      //await session.commitTransaction()
     } catch (err) {
       return next(
         console.log(err),

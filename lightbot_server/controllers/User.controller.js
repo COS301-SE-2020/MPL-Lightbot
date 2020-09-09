@@ -10,8 +10,8 @@ module.exports = {
   registerUser: asyncHandler(async (req, res, next) => {
     const { User_name, User_surname, User_email, User_password } = req.body
     let existing
-    try{
-      existing = await User.findOne({User_email:User_email})
+    try {
+      existing = await User.findOne({ User_email: User_email })
     }
     catch (err) {
       return next(
@@ -20,8 +20,7 @@ module.exports = {
         console.log(err)
       )
     }
-    if(existing)
-    {
+    if (existing) {
       return next(
         new BadRequest('User already exists please sign in.'),
         console.log("registerUser 2 User already exists please sign in")
@@ -36,7 +35,7 @@ module.exports = {
       ForumPosts: []
     })
 
-    try{
+    try {
       await createdUser.save()
     }
     catch (err) {
@@ -48,12 +47,11 @@ module.exports = {
     }
 
     let token;
-    try{
-       token = createdUser.getJWT()
-       console.log("token:"+token)
+    try {
+      token = createdUser.getJWT()
+      console.log("bearer: " + token)
     }
-    catch(err)
-    {
+    catch (err) {
       return next(
         new ErrorResponse('Something went wrong could not getJWT()', err),
         console.log("registerUser 4 Something went wrong could not getJWT()"),
@@ -61,14 +59,14 @@ module.exports = {
       )
     }
 
-    res.json(new SuccessResponse("User registration successful.",{user: createdUser.toObject({getters: true})}))
+    res.json(new SuccessResponse("User registration successful.", await User.findOne({ User_email: req.body.User_email }).select("-User_password")))
   }),
 
   loginUser: asyncHandler(async (req, res, next) => {
     const { User_email, User_password } = req.body
     let existing
-    try{
-      existing = await User.findOne({User_email:User_email})
+    try {
+      existing = await User.findOne({ User_email: User_email })
     }
     catch (err) {
       return next(
@@ -78,8 +76,7 @@ module.exports = {
       )
     }
     // console.log("loginUser 1 existing")
-    if(!existing)
-    {
+    if (!existing) {
       return next(
         new BadRequest('User does not Exist.'),
         console.log("loginUser 2 User does not Exist"),
@@ -89,11 +86,10 @@ module.exports = {
     // console.log("loginUser 2 existing")
 
     let isValidPassword = false
-    try{
-        isValidPassword = await existing.MatchPassword(existing, User_password)
+    try {
+      isValidPassword = await existing.MatchPassword(existing, User_password)
     }
-    catch(err)
-    {
+    catch (err) {
       return next(
         new ErrorResponse('Something went wrong could not login user.', err),
         console.log("loginUser 3 Something went wrong could not MatchPassword"),
@@ -102,8 +98,7 @@ module.exports = {
     }
     // console.log("loginUser 3 isValidPassword")
 
-    if(!isValidPassword)
-    {
+    if (!isValidPassword) {
       return next(
         new Unauthorized("Invalid Credentials"),
         console.log("loginUser 4 Invalid Credentials")
@@ -112,63 +107,63 @@ module.exports = {
     // console.log("loginUser 4 isValidPassword")
 
     // console.log("User login successful")
-    res.json(new SuccessResponse("User login successful.",existing.getJWT()))
+    res.json(new SuccessResponse("User login successful.", { bearer: existing.getJWT(User_email) }))
   }),
 
   logoutUser: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("Successfully signed out user.","Redirect sign in."))
+    res.json(new SuccessResponse("Successfully signed out user.", "Redirect sign in."))
   }),
 
   loggedIn: asyncHandler(async (req, res, next) => {
     // res.json(new SuccessResponse("Successfully signed out user.","Redirect sign in."))
-    const Data = await User.findOne({User_email : req.body.User_email}).select("-User_password");
-      res.json(Data);
+    const Data = await User.findOne({ User_email: req.body.User_email }).select("-User_password"); //.select("-User_password")
+    res.json(Data);
   }),
 
   updateUserDetails: asyncHandler(async (req, res, next) => {
     // res.json(new SuccessResponse("Successfully updated user details.","New user data"))
-    const filter = {User_email : req.body.User_email};
+    const filter = { User_email: req.body.User_email };
     const update = {
-      User_name : req.body.User_name,
-      User_surname : req.body.User_surname
-     };
+      User_name: req.body.User_name,
+      User_surname: req.body.User_surname
+    };
 
-     console.log(filter, update);
+    console.log(filter, update);
 
-    let doc = await User.findOne({User_email : req.body.User_email});
+    // let doc = await User.findOne({User_email : req.body.User_email});
 
     // Document changed in MongoDB, but not in Mongoose
     await User.updateOne(filter, update);
 
-    await doc.save();
-    res.json(new SuccessResponse("Successfully updated user details.","Miscellaneous"))
+    // await doc.save();
+    res.json(new SuccessResponse("Successfully updated user details.", await User.findOne({ User_email: req.body.User_email }).select("-User_password"))) //
   }),
 
   updateUserPass: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("Successfully updated user password.","Miscellaneous"))
+    res.json(new SuccessResponse("Successfully updated user password.", "Miscellaneous"))
   }),
 
   recoverUserPass: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("If an account associated with this address exists, an email will be sent to it.","Miscellaneous"))
+    res.json(new SuccessResponse("If an account associated with this address exists, an email will be sent to it.", "Miscellaneous"))
   }),
 
   resetUserPass: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("Successfully reset user password.",req.params.passresetid))
+    res.json(new SuccessResponse("Successfully reset user password.", req.params.passresetid))
   }),
 
   deleteUser: asyncHandler(async (req, res, next) => {
-    res.json(new SuccessResponse("Successfully removed user.","Redirect to sign in."))
+    res.json(new SuccessResponse("Successfully removed user.", "Redirect to sign in."))
   }),
 
   returnUsers: asyncHandler(async (req, res, next) => {
     let users
-    try{
-        users = await User.find({},'-User_password')
-    }catch (err) {
+    try {
+      users = await User.find({}, '-User_password')
+    } catch (err) {
       return next(
         //new ErrorResponse('Fetching users failed.', err)
       )
-    } 
-    res.json(new SuccessResponse("Successfully removed user.",users.map(user => user.toObject({getters: true}))))
+    }
+    res.json(new SuccessResponse("Successfully removed user.", users.map(user => user.toObject({ getters: true }))))
   }),
 }

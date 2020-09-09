@@ -4,6 +4,8 @@ require('dotenv').config({ path: './config/config.vars.env' });
 const express = require('express')
 // const handleErrors = require('./middleware/Error.handler');
 
+
+
 const app = express()
 
 //Ports
@@ -11,6 +13,9 @@ const PORT = process.env.PORT || 3000
 
 //Database Connection
 require('./utils/DBConnector.util')()
+
+//Socket Service
+//require('./utils/SocketService.util')
 
 //Init Middleware
 app.use(express.json({ extended: true }))

@@ -7,7 +7,7 @@ module.exports = (method) => {
           check('User_name', 'Name is a required field')
             // .exists()
             .isLength({ min: 3, max: 64 })
-            .withMessage('Name must be between 3 & 64 characters in length'),
+            .withMessage('Name must be between 6 & 64 characters in length'),
           check('User_surname', 'Surname is a required field')
             // .exists()
             .isLength({ min: 3, max: 64 })
