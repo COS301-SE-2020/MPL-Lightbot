@@ -42,8 +42,8 @@ export default class Login extends React.Component {
 		var isValidCred = false;
 		var sessionToken = "";
 		await axios
-			// .post( "http://129.232.161.210:8000/user/login", {
-				.post( "http://localhost:8000/user/login", {
+			 .post( "http://129.232.161.210:8000/user/login", {
+			//  .post( "http://localhost:8000/user/login", {
 				User_email: email,
 				User_password: password,
 			})

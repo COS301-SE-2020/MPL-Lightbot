@@ -133,6 +133,8 @@ module.exports = {
       User_surname : req.body.User_surname
      };
 
+     console.log(filter, update);
+
     let doc = await User.findOne({User_email : req.body.User_email});
 
     // Document changed in MongoDB, but not in Mongoose

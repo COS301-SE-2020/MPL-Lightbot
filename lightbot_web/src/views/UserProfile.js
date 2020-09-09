@@ -11,7 +11,7 @@ export default class UserProfile extends React.Component {
 	constructor(props) {
 
 		super(props);
-		// var dataS;
+		
 		this.state = {
             email: "",
             name: "",
@@ -21,30 +21,37 @@ export default class UserProfile extends React.Component {
 			changeErrors: "",
 			
         };
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount() {
+		var aresponse;
+
 		axios
-		// .post( "http://129.232.161.210:8000/user/loggedIn", {
-			.post( "http://localhost:8000/user/loggedIn", {
+		 .post( "http://129.232.161.210:8000/user/loggedIn", {
+			// .post( "http://localhost:8000/user/loggedIn", {
 				User_email: cookies.get("Email")
 			})
 			.then(response => {
+				aresponse = response.status;
 				if (response.status === 200)
 				{
-					// dataS = response.data;
-
 					console.log(response)
 					this.setState({
 						email: response.data.User_email, 
 						name: response.data.User_name,
 						surname: response.data.User_surname
-					});
-					
+					});	
 				}
 			});
+
+			if (aresponse === 200) {
+				this.setState({ changeSuccess: "Registration Successful" });
+		   } else {
+			   // Set login error state as error
+			   this.setState({ changeErrors: ""});
+		   }
 
 	}
 
@@ -54,7 +61,7 @@ export default class UserProfile extends React.Component {
         });
 	}
 	
-
+	// HANDLE UPDATE REQUEST
 	handleSubmit = async event => {
 		event.preventDefault();
 
@@ -64,11 +71,9 @@ export default class UserProfile extends React.Component {
 
 		const { email, name, surname } = this.state;
 
-		// var isValidCred = false;
-		// var sessionToken = "";
 		await axios
-			// .post( "http://129.232.161.210:8000/user/login", {
-				.post( "http://localhost:8000/user/login", {
+			 .post( "http://129.232.161.210:8000/user/update-details", {
+				// .post( "http://localhost:8000/user/update-details", {
 				User_email: email,
 				User_name: name,
 				User_surname: surname,
@@ -105,13 +110,13 @@ export default class UserProfile extends React.Component {
 											<Col className="pr-md-1" md="5">
 												<FormGroup>
 													<label>User privilages</label>
-													<Input defaultValue="Administrator" placeholder="Privilages" type="text" />
+													<Input defaultValue="Administrator" placeholder="Privilages" type="text" disabled="disabled"/>
 												</FormGroup>
 											</Col>
 											<Col className="pl-md-1" md="4">
 												<FormGroup>
 												<label htmlFor="exampleInputEmail1">Email address</label>
-                                                    <Input defaultValue={this.state.email} placeholder="Email" type="text" name="email" onChange={this.handleChange} />
+                                                    <Input defaultValue={this.state.email} placeholder="Email" type="text" name="email" disabled="disabled"/>
 												</FormGroup>
 											</Col>
 										</Row>
@@ -119,13 +124,13 @@ export default class UserProfile extends React.Component {
 											<Col className="pr-md-1" md="6">
 												<FormGroup>
 													<label>First Name</label>
-													<Input defaultValue={this.state.name} placeholder="Name" type="text" name="name" onChange={this.handleChange} />
+													<Input defaultValue={this.state.name} placeholder="Name" type="text" name="name" onChange={this.handleChange}/>
 												</FormGroup>
 											</Col>
 											<Col className="pl-md-1" md="6">
 												<FormGroup>
 													<label>Last Name</label>
-													<Input defaultValue={this.state.surname} placeholder="Surname" type="text" name="surname" onChange={this.handleChange} />
+													<Input defaultValue={this.state.surname} placeholder="Surname" type="text" name="surname" onChange={this.handleChange}/>
 												</FormGroup>
 											</Col>
 										</Row>

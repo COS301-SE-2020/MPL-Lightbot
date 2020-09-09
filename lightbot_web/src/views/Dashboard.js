@@ -26,11 +26,11 @@ import { chartExample1 } from "variables/charts.js";
 export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
-		// axios.get("http://129.232.161.210:8000/data/graph", {
-			axios.get("http://localhost:8000/data/graph", {
+		 axios.get("http://129.232.161.210:8000/data/graph", {
+			//  axios.get("http://localhost:8000/data/graph", {
             headers: { 
-                'Authorization': 'Basic xxxxxxxxxxxxxxxxxxx',
-                'Content-Type' : 'text/plain' 
+                // 'Authorization': 'Basic xxxxxxxxxxxxxxxxxxx',
+                'Content-Type' : 'application/json' 
             },
         
 	  	})

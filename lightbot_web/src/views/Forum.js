@@ -1,9 +1,53 @@
 import React from "react";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
 // reactstrap components
 import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from "reactstrap";
+const cookies = new Cookies();
 
-class Forum extends React.Component {
+export default class Forum extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+            title: "",
+            message: "",
+            creator: "",
+			date: "",
+			category: ""
+            // changeSuccess: "",
+			// changeErrors: "",
+			
+        };
+        // this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+	}
+
+	componentDidMount() {
+		axios
+		 .post( "http://129.232.161.210:8000/data/forum", {
+			// .post( "http://localhost:8000/data/forum", {
+				User_email: cookies.get("Email")
+			})
+			.then(response => {
+				if (response.status === 200)
+				{
+					// dataS = response.data;
+
+					console.log(response)
+					this.setState({
+						title: response.data.title, 
+						message: response.data.message,
+						creator: response.data.creator,
+						date: response.data.date,
+						category: response.data.category
+					});
+					
+				}
+			});
+			const { title, message, creator, date } = this.state;
+	}
+
 	render() {
 		return (
 			<>
@@ -21,14 +65,14 @@ class Forum extends React.Component {
 									<thead className="text-primary">
 											<tr>
 												<th>Title</th>
-												<th>Comments</th>
+												<th>Message</th>
 												<th>Posted By</th>
 												<th className="text-center">Date</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td>Manual Override Bug</td>
+												<td defaultValue = {this.state.title} placeholder="Title" type="text" name="title">Manual Override</td>
 												<td>Screen freezes on 3rd override</td>
 												<td>Laura Strydom</td>
 												<td className="text-center">04 August 2020</td>
@@ -58,7 +102,7 @@ class Forum extends React.Component {
 									<thead className="text-primary">
 											<tr>
 												<th>Title</th>
-												<th>Comments</th>
+												<th>Message</th>
 												<th>Posted By</th>
 												<th className="text-center">Date</th>
 											</tr>
@@ -94,7 +138,7 @@ class Forum extends React.Component {
 									<thead className="text-primary">
 											<tr>
 												<th>Title</th>
-												<th>Comments</th>
+												<th>Message</th>
 												<th>Posted By</th>
 												<th className="text-center">Date</th>
 											</tr>
@@ -124,4 +168,3 @@ class Forum extends React.Component {
 	}
 }
 
-export default Forum;

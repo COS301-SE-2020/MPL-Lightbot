@@ -48,11 +48,10 @@ export default class RegisterView extends React.Component {
 			User_email: email,
 			User_password: password,
 		  }
-		//   this.setState({ regSuccess: JSON.stringify(createdUser) });
 		
 		await axios
-			// .post( "http://129.232.161.210:8000/user/register", {
-				.post( "http://localhost:8000/user/register", {
+			 .post( "http://129.232.161.210:8000/user/register", {
+				// .post( "http://localhost:8000/user/register", {
 				User_name: name,
 				User_surname: surname,
 				User_email: email,
@@ -62,8 +61,6 @@ export default class RegisterView extends React.Component {
 				console.log("Success ========>", response);
 				aresponse = response.status;
 				bresponse = response.data;
-
-				// HANDLE RESPONSE FROM API HERE
 			})
 			.catch(error => {
 				// console.log("Error: Cannot connect to server", error);

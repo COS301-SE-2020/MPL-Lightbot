@@ -18,8 +18,8 @@ export default class Simulation extends React.Component {
 								<CardHeader>Simulation</CardHeader>
 								<CardBody>
 									<div id="manual" className="manualO" style={MyStyles.Inside}>
-									{/* <a href={"http://129.232.161.210:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download> */}
-										<a href={"http://localhost:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download>
+									<a href={"http://129.232.161.210:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download>
+										{/* <a href={"http://localhost:8000/resources/Sim.jar"} target="_blank" rel="noopener noreferrer" download> */}
 											<Button className="btn-fill" color="primary" type="submit" block>
 												Download Simulator Desktop Application
 											</Button>
