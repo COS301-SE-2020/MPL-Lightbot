@@ -38,7 +38,7 @@ export default class RegisterView extends React.Component {
 		this.state.regErrors = "";
 		this.state.regSuccess = "";
 
-		const { name, surname, email, password } = this.state;
+		const { name, surname, email, password, confirmpass } = this.state;
 		var aresponse;
 		var bresponse;
 
@@ -49,6 +49,12 @@ export default class RegisterView extends React.Component {
 			User_password: password,
 		  }
 		
+		if (password !== confirmpass)
+		{
+			this.setState({ regErrors: "The Passwords do not match."});
+			return;
+		}  
+
 		await axios
 			 .post( "http://129.232.161.210:8000/user/register", {
 				// .post( "http://localhost:8000/user/register", {
@@ -149,9 +155,11 @@ export default class RegisterView extends React.Component {
 	
 					<Input
 						type="password"
-						name="password2"
-						id="idPassword2"
+						name="confirmpass"
+						id="confirmpass"
 						placeholder="Confirm Password"
+						value={this.state.confirmpass}
+						onChange={this.handleChange}
 						style={MyStyles.Input2}
 						required
 					/>

@@ -1,52 +1,60 @@
 import React from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
+import Modal from "./Modal";
 
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from "reactstrap";
-const cookies = new Cookies();
+import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col} from "reactstrap";
+// const cookies = new Cookies();
+
 
 export default class Forum extends React.Component {
 	constructor(props) {
+		
 		super(props);
+
 		this.state = {
-            title: "",
-            message: "",
-            creator: "",
+			title: "",
+			message: "",
+			creator: "",
 			date: "",
-			category: ""
-            // changeSuccess: "",
+			forums:[]
+			// changeSuccess: "",
 			// changeErrors: "",
+		};
+	}
+
+	async componentDidMount() {	
+		
+		await axios.get("http://129.232.161.210:8000/data/forum", {
+			//  axios.get("http://localhost:8000/data/forum", {
+            headers: { 
+                'Content-Type' : 'application/json' 
+            },
+		})
+		.then((response) => {
+			// console.log(response)
+			this.setState({forums: response.data.success.data.ForumData})
+			this.state = {
+					title: response.data.title,
+				    message: response.data.message,
+				    creator: response.data.creator,
+					date: response.data.date,	
+			}
 			
-        };
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
+			console.log(response)		
+		})
 	}
 
-	componentDidMount() {
-		axios
-		 .post( "http://129.232.161.210:8000/data/forum", {
-			// .post( "http://localhost:8000/data/forum", {
-				User_email: cookies.get("Email")
-			})
-			.then(response => {
-				if (response.status === 200)
-				{
-					// dataS = response.data;
+	state = { show: false };
 
-					console.log(response)
-					this.setState({
-						title: response.data.title, 
-						message: response.data.message,
-						creator: response.data.creator,
-						date: response.data.date,
-						category: response.data.category
-					});
-					
-				}
-			});
-			const { title, message, creator, date } = this.state;
-	}
+	showModal = () => {
+		this.setState({ show: true });
+	};
+
+	hideModal = () => {
+		this.setState({ show: false });
+	};
 
 	render() {
 		return (
@@ -57,8 +65,9 @@ export default class Forum extends React.Component {
 							<Card>
 								<CardHeader>
 									<CardTitle tag="h4">
-										<b>Bug Reports</b>
+										<b>Discussion Board</b>
 									</CardTitle>
+										<Modal show={this.state.show} handleClose={this.hideModal}/>
 								</CardHeader>
 								<CardBody>
 									<Table className="tablesorter" responsive>
@@ -67,95 +76,20 @@ export default class Forum extends React.Component {
 												<th>Title</th>
 												<th>Message</th>
 												<th>Posted By</th>
-												<th className="text-center">Date</th>
+												<th>Date</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td defaultValue = {this.state.title} placeholder="Title" type="text" name="title">Manual Override</td>
-												<td>Screen freezes on 3rd override</td>
-												<td>Laura Strydom</td>
-												<td className="text-center">04 August 2020</td>
-											</tr>
-											<tr>
-												<td>Log Out Bug</td>
-												<td>Times out on certain log outs</td>
-												<td>Anthony Boekkooi</td>
-												<td className="text-center">14 July 2020</td>
-											</tr>
 											
-										</tbody>
-									</Table>
-								</CardBody>
-							</Card>
-						</Col>
-
-						<Col md="12">
-							<Card>
-								<CardHeader>
-									<CardTitle tag="h4">
-										<b>Resolved Bug Reports</b>
-									</CardTitle>
-								</CardHeader>
-								<CardBody>
-									<Table className="tablesorter" responsive>
-									<thead className="text-primary">
-											<tr>
-												<th>Title</th>
-												<th>Message</th>
-												<th>Posted By</th>
-												<th className="text-center">Date</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Manual Override Bug</td>
-												<td>Freezing screen - bug fixed</td>
-												<td>John Wick</td>
-												<td className="text-center">02 August 2020</td>
-											</tr>
-											<tr>
-												<td>Log Out Bug</td>
-												<td>Time out fixed on log out function</td>
-												<td>King Peterson</td>
-												<td className="text-center">27 July 2020</td>
-											</tr>
-										</tbody>
-									</Table>
-								</CardBody>
-							</Card>
-						</Col>
-
-						<Col md="12">
-							<Card>
-								<CardHeader>
-									<CardTitle tag="h4">
-										<b>Announcements</b>s
-									</CardTitle>
-								</CardHeader>
-								<CardBody>
-									<Table className="tablesorter" responsive>
-									<thead className="text-primary">
-											<tr>
-												<th>Title</th>
-												<th>Message</th>
-												<th>Posted By</th>
-												<th className="text-center">Date</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>System Upgrade</td>
-												<td>Time for a system upgrade!</td>
-												<td>King Peterson</td>
-												<td className="text-center">19 August 2020</td>
-											</tr>
-											<tr>
-												<td>System Down Time</td>
-												<td>The system will be down on Tuesday 15/05/2020 for system fixes.</td>
-												<td>Laura Strydom</td>
-												<td className="text-center">29 July 2020</td>
-											</tr>
+											{this.state.forums.map((item, index) => (
+												<tr>
+													<td key={index}>{item.title}</td>
+													<td key={index}>{item.message}</td>
+													<td key={index}>{item.creator}</td>
+													<td key={index}>{item.date}</td>
+												</tr>
+											))}
+											
 										</tbody>
 									</Table>
 								</CardBody>
@@ -168,3 +102,13 @@ export default class Forum extends React.Component {
 	}
 }
 
+// const MyStyles = {
+// 	modalStyle: {
+// 		position: 'fixed',
+// 		top: '0',
+// 		left: '0',
+// 		width: '100%',
+// 		height: '100%',
+// 		background: 'rgba(0, 0, 0, 0.6)'
+// 	  }
+// }

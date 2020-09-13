@@ -23,7 +23,6 @@ export default class Login extends React.Component {
 	}
 
 	handleChange(event) {
-		//console.log(event.target.value);
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
@@ -80,15 +79,10 @@ export default class Login extends React.Component {
 
 	render() {
 		return (
-			// All styles here are localized , move to scss in future
 			<Form className="LoginPane">
 				<img className="LoginLogo" alt="..." src={require("assets/img/LBlogo.png")} />
 
 				<h4 style={MyStyles.Hdr}>AN ENHANCED ADAPTIVE TRAFFIC OPTIMIZATION SOLUTION WITH REINFORCEMENT LEARNING</h4>
-				
-				{/* <h1 className="LoginLabel" style={MyStyles.Hdr}>
-					LOGIN
-				</h1> */}
 				<h2 style={MyStyles.LoginLabel2}>Welcome! Please Log In</h2>
 
 				<FormGroup style={MyStyles.Linput1}>
@@ -203,7 +197,4 @@ const MyStyles = {
 		height: "50px", 
 		fontSize: "18px" 
 	},
-	// Hdr: { 
-	// 	marginBottom: 20 
-	// }
 }

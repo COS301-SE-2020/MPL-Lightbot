@@ -4,10 +4,6 @@ import React from "react";
 import { Card, CardHeader, CardBody, Row, Col, Button, Table, CardTitle} from "reactstrap";
 
 export default class Simulation extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<>

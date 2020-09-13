@@ -7,7 +7,7 @@ const User = require('../models/User.model')
 const UserController = require('./User.controller')
 const mongoose = require('mongoose')
 // const Notification = require('../models/Notification.model')
-// const State = require('../models/State.model')
+const State = require('../models/State.model')
 
 module.exports = {
   getGraphData: asyncHandler(async (req, res, next) => {
@@ -30,15 +30,15 @@ module.exports = {
     )
   }),
 
-  getNotificationData: asyncHandler(async (req, res, next) => {
-    NotificationData = await Forum.find()
-    res.json(
-      new SuccessResponse(
-        'Successfully acquired notification data.',
-        {NotificationData: NotificationData}
-      )
-    )
-  }),
+  // getNotificationData: asyncHandler(async (req, res, next) => {
+  //   NotificationData = await Forum.find()
+  //   res.json(
+  //     new SuccessResponse(
+  //       'Successfully acquired notification data.',
+  //       {NotificationData: NotificationData}
+  //     )
+  //   )
+  // }),
 
   getStateData: asyncHandler(async (req, res, next) => {
     StateData = await Forum.find()

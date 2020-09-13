@@ -20,10 +20,10 @@ router.get(
 // // @route     GET data/notification
 // // @desc      Notification Data Route
 // // @access    Public
-router.get(
-    '/notification',
-    require('../controllers/Data.controller').getNotificationData
-  )
+// router.get(
+//     '/notification',
+//     require('../controllers/Data.controller').getNotificationData
+//   )
 
 // // @route     GET data/state
 // // @desc      State Data Route

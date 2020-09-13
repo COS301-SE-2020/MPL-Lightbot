@@ -175,7 +175,6 @@ export default class UserProfile extends React.Component {
 const MyStyles = {
 	Alrt: { 
 		marginTop: "30px", 
-		// marginLeft: "400px", 
 		marginRight: "390px",
 		paddingLeft: "310px"
 	},

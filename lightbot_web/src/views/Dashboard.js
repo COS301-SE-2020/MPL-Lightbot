@@ -29,25 +29,19 @@ export default class Dashboard extends React.Component {
 		 axios.get("http://129.232.161.210:8000/data/graph", {
 			//  axios.get("http://localhost:8000/data/graph", {
             headers: { 
-                // 'Authorization': 'Basic xxxxxxxxxxxxxxxxxxx',
                 'Content-Type' : 'application/json' 
             },
         
 	  	})
 	  	.then((response) => {
-			// console.log(response.data);
 			let dataArr =[];
-			// var json = response.toJSON(); 
 			let items = response.data;
 			for (let i = 0; i < items.length; ++i) {
-				// console.log(items[i].Total_sim);
 				dataArr.push(items[i].Total_sim);
 			}
-			// console.log(dataArr);
 			chartExample1.setData(dataArr);
 		  });
 
-		// chartExample1.setData
 		this.state = {
 			bigChartData: "data1",
 		};
