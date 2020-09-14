@@ -66,9 +66,9 @@ let chartExample1 = {
 	// 	},
 
 		setData: function(dataArr) {
-			console.log("Test");
+			// console.log("Test");
 			newData = dataArr;
-			console.log(newData);
+			// console.log(newData);
 		  },
 
 	data1: canvas => {

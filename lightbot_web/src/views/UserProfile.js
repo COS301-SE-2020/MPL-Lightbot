@@ -144,7 +144,7 @@ export default class UserProfile extends React.Component {
 										<div className="block block-three" />
 										<div className="block block-four" />
 										<a href="#pablo" onClick={e => e.preventDefault()}>
-											<img alt="..." className="avatar" src={require("assets/img/Duncan.jpeg")} />
+											<img alt="..." className="avatar" src={require("assets/img/avatar.png")} />
 											<h5 className="title">{this.state.name + " " + this.state.surname}</h5>
 											
 										</a>

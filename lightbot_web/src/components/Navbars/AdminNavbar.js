@@ -125,7 +125,7 @@ class AdminNavbar extends React.Component {
 								<UncontrolledDropdown nav>
 									<DropdownToggle caret color="default" data-toggle="dropdown" nav onClick={e => e.preventDefault()}>
 										<div className="photo">
-											<img alt="..." src={require("assets/img/Duncan.jpeg")} />
+											<img alt="..." src={require("assets/img/avatar.png")} />
 										</div>
 										<b className="caret d-none d-lg-block d-xl-block" />
 										<p className="d-lg-none">Log out</p>

@@ -26,16 +26,27 @@ import { chartExample1 } from "variables/charts.js";
 export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
-		 axios.get("http://129.232.161.210:8000/data/graph", {
+
+		this.state = {
+			number: "",
+			systemState: "",
+			controller: "",
+			controllerState: "",
+			overview:[],
+				// changeSuccess: "",
+				// changeErrors: "",
+		};
+		 
+		axios.get("http://129.232.161.210:8000/data/graph", {
 			//  axios.get("http://localhost:8000/data/graph", {
             headers: { 
                 'Content-Type' : 'application/json' 
             },
-        
 	  	})
 	  	.then((response) => {
+			//   console.log(response.data.success.data);
 			let dataArr =[];
-			let items = response.data;
+			let items = response.data.success.data.GraphData;
 			for (let i = 0; i < items.length; ++i) {
 				dataArr.push(items[i].Total_sim);
 			}
@@ -45,6 +56,29 @@ export default class Dashboard extends React.Component {
 		this.state = {
 			bigChartData: "data1",
 		};
+	}
+
+	async componentDidMount() {	
+		
+		await axios.get("http://129.232.161.210:8000/data/state", {
+			//  axios.get("http://localhost:8000/data/state", {
+            headers: { 
+                'Content-Type' : 'application/json' 
+            },
+		})
+		.then((response) => {
+			// console.log(response.data.success.data.StateData)
+			
+			this.setState({overview: response.data.success.data.StateData})
+			this.state = {
+				number: response.data.number,
+				systemState: response.data.systemState,
+				controller: response.data.controller,
+				controllerState: response.data.controllerState,	
+			}
+			console.log(this.state.overview)
+			// console.log(response)		
+		})
 	}
 
 	setBgChartData = name => {
@@ -106,25 +140,21 @@ export default class Dashboard extends React.Component {
 									<Table className="tablesorter" responsive>
 									<thead className="text-primary">
 											<tr>
-												<th className="text-center">Nr.</th>
+												<th>Nr.</th>
 												<th>State of System</th>
 												<th>Active Traffic Controller</th>
 												<th>Controller State</th>
 											</tr>
-										</thead>
+									</thead>
 										<tbody>
-											<tr>
-												<td className="text-center">1</td>
-												<td>Online</td>
-												<td>Fixed Time-Based Controller</td>
-												<td>Online</td>
-											</tr>
-											<tr>
-												<td className="text-center">2</td>
-												<td>Online</td>
-												<td>Fuzzy Logic Controller</td>
-												<td>Offline</td>
-											</tr>
+											{/* {this.state.overview.map((item, index) => (
+												<tr>
+													<td key={index}>{item.number}</td>
+													<td key={index}>{item.systemState}</td> 
+													<td key={index}>{item.controller}</td>
+													<td key={index}>{item.controllerState}</td>
+												</tr>
+											))} */}
 											
 										</tbody>
 									</Table>

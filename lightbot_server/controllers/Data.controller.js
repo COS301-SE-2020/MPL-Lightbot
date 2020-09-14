@@ -41,7 +41,7 @@ module.exports = {
   // }),
 
   getStateData: asyncHandler(async (req, res, next) => {
-    StateData = await Forum.find()
+    StateData = await State.find()
     res.json(
       new SuccessResponse(
         'Successfully acquired state data.',
