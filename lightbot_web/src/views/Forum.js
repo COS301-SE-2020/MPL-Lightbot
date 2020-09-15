@@ -36,7 +36,6 @@ export default class Forum extends React.Component {
 		})
 		.then((response) => {
 			// console.log(response.data.success.data.ForumData)
-
 			this.setState({forums: response.data.success.data.ForumData})
 			this.state = {
 					title: response.data.title,
@@ -44,7 +43,7 @@ export default class Forum extends React.Component {
 				    creator: response.data.creator,
 					date: response.data.date,	
 			}
-			
+		
 			// console.log(response.data.success.data.ForumData)		
 		})
 	}

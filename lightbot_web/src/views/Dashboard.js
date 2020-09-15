@@ -13,7 +13,6 @@ import {
 	CardHeader,
 	CardBody,
 	CardTitle,
-	// Input,
 	Table,
 	Row,
 	Col,
@@ -32,10 +31,9 @@ export default class Dashboard extends React.Component {
 			systemState: "",
 			controller: "",
 			controllerState: "",
-			overview:[],
-				// changeSuccess: "",
-				// changeErrors: "",
-		};
+			overviewHERE:[],
+			
+		}
 		 
 		axios.get("http://129.232.161.210:8000/data/graph", {
 			//  axios.get("http://localhost:8000/data/graph", {
@@ -58,8 +56,14 @@ export default class Dashboard extends React.Component {
 		};
 	}
 
+	setBgChartData = name => {
+		this.setState({
+			bigChartData: name,
+		});
+	};
+
 	async componentDidMount() {	
-		
+		// let dataArr1 =[];
 		await axios.get("http://129.232.161.210:8000/data/state", {
 			//  axios.get("http://localhost:8000/data/state", {
             headers: { 
@@ -68,24 +72,26 @@ export default class Dashboard extends React.Component {
 		})
 		.then((response) => {
 			// console.log(response.data.success.data.StateData)
+
 			
-			this.setState({overview: response.data.success.data.StateData})
+			// let items = response.data.success.data.StateData;
+			// for (let i = 0; i < items.length; ++i) {
+			// 	dataArr1.push(items[i]);
+			// }
+			// console.log(dataArr1);
+			this.setState({ overviewHERE: response.data.success.data.StateData })
+			
 			this.state = {
 				number: response.data.number,
 				systemState: response.data.systemState,
 				controller: response.data.controller,
 				controllerState: response.data.controllerState,	
 			}
-			console.log(this.state.overview)
 			// console.log(response)		
 		})
+		// this.setState({ overview: dataArr1 })
+		// console.log(this.state.overview)
 	}
-
-	setBgChartData = name => {
-		this.setState({
-			bigChartData: name,
-		});
-	};
 
 	render() {
 		return (
@@ -115,7 +121,7 @@ export default class Dashboard extends React.Component {
 													<input defaultChecked className="d-none" name="options" type="radio" />
 													<span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
 													<span className="d-block d-sm-none">
-														<i className="tim-icons icon-single-02" />
+													<i className="tim-icons icon-single-02" />
 													</span>
 												</Button>
 											</ButtonGroup>
@@ -130,6 +136,7 @@ export default class Dashboard extends React.Component {
 							</Card>
 						</Col>
 					</Row>
+
 					<Row>
 						<Col lg="6" md="12">
 							<Card>
@@ -147,14 +154,15 @@ export default class Dashboard extends React.Component {
 											</tr>
 									</thead>
 										<tbody>
-											{/* {this.state.overview.map((item, index) => (
-												<tr>
-													<td key={index}>{item.number}</td>
-													<td key={index}>{item.systemState}</td> 
-													<td key={index}>{item.controller}</td>
-													<td key={index}>{item.controllerState}</td>
-												</tr>
-											))} */}
+											{/* {this.state.overviewHERE.map((item, index) => (
+											<tr>
+												<td key={index}>{item.number}</td>
+											 	<td key={index}>{item.systemState}</td> 
+												<td key={index}>{item.controller}</td>
+												<td key={index}>{item.controllerState}</td>
+											</tr>
+											
+										 	))} */}
 											
 										</tbody>
 									</Table>
