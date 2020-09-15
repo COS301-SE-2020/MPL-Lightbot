@@ -163,6 +163,18 @@ export default class Dashboard extends React.Component {
 											</tr>
 											
 										 	))} */}
+											 <tr>
+												<th className="text-center">1</th>
+												<th>Online</th>
+												<th>Fixed Time-Based Controller</th>
+												<th>Online</th>
+											</tr>
+											<tr>
+												<th className="text-center">2</th>
+												<th>Online</th>
+												<th>Fuzzy Logic Controller</th>
+												<th>Online</th>
+											</tr>
 											
 										</tbody>
 									</Table>

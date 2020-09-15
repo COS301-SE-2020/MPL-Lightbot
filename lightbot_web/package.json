@@ -22,7 +22,7 @@
 		"react-modal": "^3.11.2",
 		"react-notification-alert": "0.0.12",
 		"react-router-dom": "5.1.2",
-		"react-scripts": "3.4.0",
+		"react-scripts": "^3.4.3",
 		"reactstrap": "8.4.1",
 		"sweetalert2": "^10.0.2",
 		"universal-cookie": "^4.0.3"
@@ -53,7 +53,11 @@
 		"typescript": "3.8.3"
 	},
 	"devDependencies": {
+		"coveralls": "^3.1.0",
+		"eslint": "^7.9.0",
+		"eslint-plugin-react": "^7.20.6",
 		"gulp": "4.0.2",
-		"gulp-append-prepend": "1.0.8"
+		"gulp-append-prepend": "1.0.8",
+		"jest": "^26.4.2"
 	}
 }
