@@ -13,11 +13,8 @@ This repository represents a remote collaboration for LightBot Fuzzy Logic Adapt
 * GitKraken / GitHub Desktop
 
 ## Documentation
-* SRS Document V.4: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Demo%204%20Documents/Requirements%20Specification%20V.4.docx.pdf
-* User Manual V.3: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Demo%204%20Documents/User%20Manual%20V.3.pdf
-* Coding Standards V.2: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Demo%204%20Documents/Coding%20Standards%20V.2.pdf
-* Technical Installation Manual V.2: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Demo%204%20Documents/Technical%20Installation%20Manual%20V.2.pdf
-* Testing Policy Document V.1: https://github.com/COS301-SE-2020/MPL-Lightbot/blob/master/lightbot_doc/Demo%204%20Documents/Testing%20Policy%20V.1.pdf
+* Demo 3 Documents link: https://github.com/COS301-SE-2020/MPL-Lightbot/tree/master/lightbot_doc/Demo%203%20Documents 
+* Demo 4 Documents link: https://github.com/COS301-SE-2020/MPL-Lightbot/tree/master/lightbot_doc/Demo%204%20Documents
 
 ## Demo Videos
 * Demo 3 Video link: https://drive.google.com/file/d/1NHRfoBwe2WA-v8maNG0mFjLMf60DvdgB/view?usp=sharing
