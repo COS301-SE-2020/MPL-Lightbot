@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "d705200a-a13f-4acf-95a0-f3d998601510",
+		"name": "LightBot API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Login & Registration",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"User_email\": \"tim@gmail.com\",\n    \"User_password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.232.161.210:8000/user/login",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"User_name\": \"Eduan\",\n    \"User_surname\": \"Kruyswijk\",\n    \"User_email\": \"eduank@yahoo.com\",\n    \"User_password\": \"EduanK12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.232.161.210:8000/user/register",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "System Overview API's",
+			"item": [
+				{
+					"name": "Simulation Performance Graph Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.232.161.210:8000/data/graph",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"data",
+								"graph"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "System State Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.232.161.210:8000/data/state",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"data",
+								"state"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Forum API's",
+			"item": [
+				{
+					"name": "Forum Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://129.232.161.210:8000/data/forum",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"data",
+								"forum"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Forum Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Test Forum Post\",\n    \"message\": \"Insert message here\",\n    \"creator\": \"tim@gmail.com\"\n}\n"
+						},
+						"url": {
+							"raw": "http://129.232.161.210:8000/data/post-forum",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"data",
+								"post-forum"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User Profile API's",
+			"item": [
+				{
+					"name": "Logged In User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"User_email\": \"tim@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.232.161.210:8000/user/loggedIn",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"loggedIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"User_email\": \"tim@gmail.com\",\n\t\"User_name\": \"Timothy\",\n\t\"User_surname\": \"Lee\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://129.232.161.210:8000/user/update-details",
+							"protocol": "http",
+							"host": [
+								"129",
+								"232",
+								"161",
+								"210"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"update-details"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
