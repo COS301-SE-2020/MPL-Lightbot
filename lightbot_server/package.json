@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
   "author": "MPL Strydom",
   "license": "MIT",
