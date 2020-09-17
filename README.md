@@ -10,7 +10,8 @@ This repository represents a remote collaboration for LightBot Fuzzy Logic Adapt
 ## Project Management Tools 
 
 * ClickUp (Used for task allocation and time management) - https://share.clickup.com/l/h/2dyz3-141/e75ad4ae1b0344a
-* GitKraken / GitHub Desktop
+* GitHub Desktop
+* Google Drive link: https://drive.google.com/drive/folders/101NtCwA2nXVrXyNUomQ1-xkTRQt1KERr?usp=sharing
 
 ## Documentation
 * Demo 3 Documents link: https://github.com/COS301-SE-2020/MPL-Lightbot/tree/master/lightbot_doc/Demo%203%20Documents 
@@ -18,7 +19,7 @@ This repository represents a remote collaboration for LightBot Fuzzy Logic Adapt
 
 ## Demo Videos
 * Demo 3 Video link: https://drive.google.com/file/d/1NHRfoBwe2WA-v8maNG0mFjLMf60DvdgB/view?usp=sharing
-* Demo 4 Video link: 
+* Demo 4 Video link: https://drive.google.com/file/d/11P_DXzSZjZtx1FQSCE8UppMJijpTERGu/view?usp=sharing
 
 ## Collaborators
 <b>Laura-Lee Strydom :</b><br>
